@@ -86,6 +86,8 @@ int varAngAux0 = 0;
 int varAngAux1 = 0;
 int varAngAux2 = 0;
 
+bool banderaLuzFlipper = false;
+
 float zEnResorte = 50.0f;
 float auxResorte = 0.0f;
 int moverResorte = 0;
@@ -186,6 +188,7 @@ Material Material_brillante;
 Material Material_opaco;
 
 
+
 //Sphere cabeza = Sphere(0.5, 20, 20);
 GLfloat deltaTime = 0.0f;
 GLfloat lastTime = 0.0f;
@@ -196,6 +199,7 @@ DirectionalLight mainLight;
 //para declarar varias luces de tipo pointlight
 PointLight pointLights[MAX_POINT_LIGHTS];
 SpotLight spotLights[MAX_SPOT_LIGHTS];
+SpotLight spotLights2[MAX_SPOT_LIGHTS];
 
 // Vertex Shader
 static const char* vShader = "shaders/shader_light.vert";
@@ -630,18 +634,39 @@ int main()
 		0.0f, 0.0f, -1.0f);
 	//contador de luces puntuales
 	unsigned int pointLightCount = 0;
-
+	//Luz que ilumina de dia y de noche
+	pointLights[0] = PointLight(1.0f, 0.0f, 0.0f,
+		5.0f, 1.0f,
+		0.0f, 50.0f, 0.0f,
+		0.1, 0.2f, 0.1f);
+	pointLightCount++;
 
 	unsigned int spotLightCount = 0;
-	//linterna
-	spotLights[0] = SpotLight(1.0f, 1.0f, 1.0f,
+	//Linterna
+	spotLights[0] = SpotLight(0.0f, 0.0f, 0.0f,
 		0.0f, 2.0f,
 		0.0f, 0.0f, 0.0f,
 		0.0f, -1.0f, 0.0f,
 		1.0f, 0.0f, 0.0f,
-		5.0f);
+		15.0f);
 	spotLightCount++;
 
+	//Luz flippers
+	spotLights[1] = SpotLight(0.0f, 0.0f, 1.0f, //Color
+		5.0f, 2.0f, //Intesidad
+		1.0f, 48.0f, 40.0f, //Posicion
+		-5.0f, 0.0f, -24.0f,	//Direccion 
+		0.5f, 0.2f, 0.01f,	//Atenuacion
+		15.0f);				//Angulo de abertura
+	spotLightCount++;
+
+	//Avatar
+	spotLights2[0] = SpotLight(1.0f, 1.0f, 0.5f,
+		1.0f, 2.0f,
+		5.0f, 10.0f, 0.0f,
+		0.0f, -5.0f, 0.0f,
+		1.0f, 0.0f, 0.0f,
+		15.0f);
 
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
 		uniformSpecularIntensity = 0, uniformShininess = 0, uniformTextureOffset = 0;
@@ -769,6 +794,7 @@ int main()
 		if (ciclioDia == true)
 		{
 			skybox.DrawSkybox(camera.calculateViewMatrix(), projection);
+
 		}
 		else
 		{
@@ -792,19 +818,39 @@ int main()
 		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
 		glUniform3f(uniformEyePosition, camera.getCameraPosition().x, camera.getCameraPosition().y, camera.getCameraPosition().z);
 
-		// luz ligada a la cámara de tipo flash
-		glm::vec3 lowerLight = camera.getCameraPosition();
-		lowerLight.y -= 0.3f;
-		spotLights[0].SetFlash(lowerLight, camera.getCameraDirection());
-
-
-
-
+		
 		//información al shader de fuentes de iluminación
 		shaderList[0].SetDirectionalLight(&mainLight);
-		shaderList[0].SetPointLights(pointLights, pointLightCount);
-		shaderList[0].SetSpotLights(spotLights, spotLightCount);
+		
+		if (ciclioDia == true)
+		{
+			shaderList[0].SetPointLights(pointLights, pointLightCount);
+		}
+		else
+		{
+			shaderList[0].SetPointLights(pointLights, pointLightCount-1);
 
+		}
+
+
+
+		if (mainWindow.activarLuzFlippe())
+		{
+			{
+				shaderList[0].SetSpotLights(spotLights, spotLightCount);
+				
+			}
+		}
+		else
+		{
+			shaderList[0].SetSpotLights(spotLights, spotLightCount - 1);
+			
+		}
+		
+		if (mainWindow.activarAvatar())
+		{
+			shaderList[0].SetSpotLights(spotLights2, 1);
+		}
 
 		glm::mat4 model(1.0);
 		glm::mat4 modelaux(1.0);
@@ -1168,7 +1214,7 @@ int main()
 		// torso cabeza
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-13.5f + mainWindow.getmuevex(), 48.0f , 33.0f - mainWindow.getmuevez()));
-
+		spotLights2[0].SetPos(glm::vec3( - 13.5f + mainWindow.getmuevex(), 50.0f, 33.0f - mainWindow.getmuevez()));
 		model = glm::scale(model, glm::vec3(0.75 , 0.75f, 0.75f));
 		model = glm::rotate(model, (90.0f + RotAvatar) * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		modelaux2 = model;

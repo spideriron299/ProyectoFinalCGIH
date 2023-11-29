@@ -27,6 +27,8 @@ Window::Window(GLint windowWidth, GLint windowHeight)
 	movZ = false;
 	movMenosZ = false;
 	activador = 0;
+	LuzFlippe = 0;
+	LuzAvatar = 0;
 
 	for (size_t i = 0; i < 1024; i++)
 	{
@@ -238,23 +240,7 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 		theWindow->muevez -= 0.1;
 	}
 
-	if (key == GLFW_KEY_R)
-	{
-		theWindow->mueveRot += 0.5;
-	}
-	if (key == GLFW_KEY_Y)
-	{
-		theWindow->mueveRot -= 0.5;
-	}
 
-	if (key == GLFW_KEY_J)
-	{
-		theWindow->escala += 0.25;
-	}
-	if (key == GLFW_KEY_K)
-	{
-		theWindow->escala -= 0.25;
-	}
 	// Boton Flipper1
 	if (key == GLFW_KEY_Z)
 	{
@@ -300,12 +286,40 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 		theWindow->isometrica = 0.0f;
 	}
 
-	//Activador para pruebas :D
+	//Activador para animacion de la canica
 	if (key == GLFW_KEY_M)
 	{
 		theWindow->activador = 1;
 	}
 
+	//Activador para luzFlipper
+	if (key == GLFW_KEY_N)
+	{
+		{
+			theWindow->LuzFlippe = true;
+		}
+	}
+	if (key == GLFW_KEY_J)
+	{
+		{
+			theWindow->LuzFlippe = false;
+		}
+	}
+
+
+	//Activador para la luz avatar
+	if (key == GLFW_KEY_V)
+	{
+		{
+			theWindow->LuzAvatar = true;
+		}
+	}
+	if (key == GLFW_KEY_B)
+	{
+		{
+			theWindow->LuzAvatar = false;
+		}
+	}
 
 
 	if (key >= 0 && key < 1024)

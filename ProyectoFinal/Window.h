@@ -28,6 +28,8 @@ public:
 	GLboolean moverResorte() { return estadoResorte; }
 	GLfloat getIsometrica() { return isometrica; };
 	GLint activar() { return activador; }
+	GLint activarLuzFlippe() { return LuzFlippe; }
+	GLint activarAvatar() { return LuzAvatar; }
 	bool getShouldClose() {
 		return  glfwWindowShouldClose(mainWindow);}
 	bool* getsKeys() { return keys; }
@@ -58,6 +60,8 @@ private:
 	GLboolean movZ;
 	GLboolean movMenosZ;
 	GLint activador;
+	GLint LuzFlippe;
+	GLint LuzAvatar;
 	GLfloat isometrica = 0.0f;
 	
 	bool mouseFirstMoved;
