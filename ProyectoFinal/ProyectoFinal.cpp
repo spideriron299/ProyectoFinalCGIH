@@ -708,23 +708,24 @@ int main()
 	
 	
 	//Audio
+	//Audio que siempre esta activo
 
-	irrklang::ISoundEngine* engine = irrklang::createIrrKlangDevice();
-	if (!engine) return 1; // could not start engine
+	irrklang::ISoundEngine* musicaFondo = irrklang::createIrrKlangDevice();
+	if (!musicaFondo) return 1; // could not start engine
 
-	irrklang::vec3df position(6.5f, 46.0f, 13.75f);
+	irrklang::ISoundEngine* sonidoCamara1 = irrklang::createIrrKlangDevice();
+	if (!sonidoCamara1) return 1; // could not start engine
 
-	// start the sound paused:
-	irrklang::ISound* snd = engine->play3D("yourSound.wav", position, false, true);
+	irrklang::ISoundEngine* sonidoCamara2 = irrklang::createIrrKlangDevice();
+	if (!sonidoCamara2) return 1; // could not start engine
 
-	if (snd)
-	{
-		snd->setMinDistance(30.0f); // a loud sound
-		snd->setIsPaused(false); // unpause the sound
-	}
+	irrklang::ISoundEngine* sonidoCamara3 = irrklang::createIrrKlangDevice();
+	if (!sonidoCamara3) return 1; // could not start engine
 
-//	engine->play2D("MGSAmbiente.mp3", true); // play some mp3 file, looped	Audio 2D
 
+	musicaFondo->play2D("MGSAmbiente.mp3", true); // play some mp3 file, looped	Audio 2D
+	musicaFondo->setSoundVolume(0.5f);
+	
 	////Loop mientras no se cierra la ventana///////////////////////////////////////////////////////////////////////////
 	while (!mainWindow.getShouldClose())
 	{
@@ -745,11 +746,6 @@ int main()
 		cambioNumero7 = (numero / 10000000) % 10;
 		cambioNumero8 = (numero / 100000000) % 10;
 
-		//PARA PARAR LA MUSICA
-
-		//std::cin.get(); // wait until user presses a key
-
-		//engine->drop(); // delete engine
 
 		//Recibir eventos del usuario
 		glfwPollEvents();
@@ -1169,8 +1165,6 @@ int main()
 			}
 		}
 
-		printf("El valor booleano es %s\n", mainWindow.mueveEnZ() ? "verdadero" : "falso");
-		printf("El valor de Rotacion es %f\n", RotAvatar);
 		// torso cabeza
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-13.5f + mainWindow.getmuevex(), 48.0f , 33.0f - mainWindow.getmuevez()));
@@ -1289,6 +1283,8 @@ int main()
 					numero += 10000;
 					varAngAux1 = 1;
 					varAuxCanica1 = 5;
+					sonidoCamara1->play2D("sonidoCamara.mp3", false); // play some mp3 file, looped	Audio 2D
+
 				}
 			}
 			
@@ -1308,6 +1304,8 @@ int main()
 					varAngAux2 = 1;
 					varAuxCanica1 = 6;
 					numero += 1000;
+					sonidoCamara2->play2D("sonidoCamara.mp3", false); // play some mp3 file, looped	Audio 2D
+
 				}
 			}
 			
