@@ -21,6 +21,10 @@ public:
 	GLboolean moverFlipper1() { return estadoFlipper1; }
 	GLboolean moverFlipper2() { return estadoFlipper2; }
 	GLboolean moverFlipper3() { return estadoFlipper3; }
+	GLboolean mueveEnX() { return movX; }
+	GLboolean mueveEnMenosX() { return movMenosX; }
+	GLboolean mueveEnZ() { return movZ; }
+	GLboolean mueveEnMenosZ() { return movMenosZ; }
 	GLboolean moverResorte() { return estadoResorte; }
 	GLfloat getIsometrica() { return isometrica; };
 	GLint activar() { return activador; }
@@ -49,6 +53,10 @@ private:
 	GLboolean estadoFlipper2;
 	GLboolean estadoFlipper3;
 	GLboolean estadoResorte;
+	GLboolean movX;
+	GLboolean movMenosX;
+	GLboolean movZ;
+	GLboolean movMenosZ;
 	GLint activador;
 	GLfloat isometrica = 0.0f;
 	

@@ -22,6 +22,10 @@ Window::Window(GLint windowWidth, GLint windowHeight)
 	estadoFlipper2 = false;
 	estadoFlipper3 = false;
 	estadoResorte = false;
+	movX = false;
+	movMenosX = false;
+	movZ = false;
+	movMenosZ = false;
 	activador = 0;
 
 	for (size_t i = 0; i < 1024; i++)
@@ -105,8 +109,10 @@ GLfloat Window::getYChange()
 }
 
 
-
-
+static bool keyDown = false;
+static bool keyDown2 = false;
+static bool keyDown3 = false;
+static bool keyDown4 = false;
 void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, int mode)
 {
 	Window* theWindow = static_cast<Window*>(glfwGetWindowUserPointer(window));
@@ -115,13 +121,104 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 	{
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	}
+
+
+	
+	//Para que el personaje active su animacion
 	if (key == GLFW_KEY_D)
 	{
-		theWindow-> muevex += 0.25;
+		if (action == GLFW_PRESS)
+		{
+			keyDown = true;
+		}
+		else if (action == GLFW_RELEASE)
+		{
+			keyDown = false;
+		}
+	}
+
+	if (keyDown)
+	{
+		theWindow->movX = true;
+	}
+	else
+	{
+		theWindow->movX = false;
+	}
+
+	if (key == GLFW_KEY_A)
+	{
+		if (action == GLFW_PRESS)
+		{
+			keyDown2 = true;
+		}
+		else if (action == GLFW_RELEASE)
+		{
+			keyDown2 = false;
+		}
+	}
+
+	if (keyDown2)
+	{
+		theWindow->movMenosX = true;
+	}
+	else
+	{
+		theWindow->movMenosX = false;
+	}
+
+
+	if (key == GLFW_KEY_W)
+	{
+		if (action == GLFW_PRESS)
+		{
+			keyDown3 = true;
+		}
+		else if (action == GLFW_RELEASE)
+		{
+			keyDown3 = false;
+		}
+	}
+
+	if (keyDown3)
+	{
+		theWindow->movZ = true;
+	}
+	else
+	{
+		theWindow->movZ = false;
+	}
+
+	if (key == GLFW_KEY_S)
+	{
+		if (action == GLFW_PRESS)
+		{
+			keyDown4 = true;
+		}
+		else if (action == GLFW_RELEASE)
+		{
+			keyDown4 = false;
+		}
+	}
+
+	if (keyDown4)
+	{
+		theWindow->movMenosZ = true;
+	}
+	else
+	{
+		theWindow->movMenosZ = false;
+	}
+
+
+
+	if (key == GLFW_KEY_D)
+	{
+		theWindow-> muevex += 0.1;
 	}
 	if (key == GLFW_KEY_A)
 	{
-		theWindow-> muevex -= 0.25;
+		theWindow-> muevex -= 0.1;
 	}
 	if (key == GLFW_KEY_T)
 	{
@@ -134,11 +231,11 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 
 	if (key == GLFW_KEY_W)
 	{
-		theWindow->muevez += 0.25;
+		theWindow->muevez += 0.1;
 	}
 	if (key == GLFW_KEY_S)
 	{
-		theWindow->muevez -= 0.25;
+		theWindow->muevez -= 0.1;
 	}
 
 	if (key == GLFW_KEY_R)
@@ -224,6 +321,8 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 			//printf("se solto la tecla %d'\n", key);
 		}
 	}
+
+
 }
 
 void Window::ManejaMouse(GLFWwindow* window, double xPos, double yPos)

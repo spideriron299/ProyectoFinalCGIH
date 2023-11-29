@@ -95,7 +95,18 @@ float canica1X = 0.0f;
 float canica1Y = 0.0f;
 float canica1Z = 0.0f;
 int varAuxCanica1 = 0;
+//Animacion avatar
+int banderaBrazoIzq = 0; 
+int banderaBrazoDer = 0;
+int banderaPiernaIzq = 0;
+int banderaPiernaDer = 0;
+int banderaRotAvatar = 0;
 
+float BrazoIzq = 0.0f; 
+float BrazoDer = 0.0f;
+float PiernaIzq = 0.0f;
+float PiernaDer = 0.0f;
+float RotAvatar = 0.0f;
 
 bool ciclioDia;
 
@@ -701,7 +712,18 @@ int main()
 	irrklang::ISoundEngine* engine = irrklang::createIrrKlangDevice();
 	if (!engine) return 1; // could not start engine
 
-	engine->play2D("MGSAmbiente.mp3", true); // play some mp3 file, looped
+	irrklang::vec3df position(6.5f, 46.0f, 13.75f);
+
+	// start the sound paused:
+	irrklang::ISound* snd = engine->play3D("yourSound.wav", position, false, true);
+
+	if (snd)
+	{
+		snd->setMinDistance(30.0f); // a loud sound
+		snd->setIsPaused(false); // unpause the sound
+	}
+
+//	engine->play2D("MGSAmbiente.mp3", true); // play some mp3 file, looped	Audio 2D
 
 	////Loop mientras no se cierra la ventana///////////////////////////////////////////////////////////////////////////
 	while (!mainWindow.getShouldClose())
@@ -1049,13 +1071,112 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		katana.RenderModel();
 		///Avatar ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		//Animacion Avatar
+		//Si se presiona D va para adelante
+		if (mainWindow.mueveEnX() || mainWindow.mueveEnZ()) {
+			if (banderaBrazoIzq == 0) {
+				BrazoIzq = (BrazoIzq < 45) ? BrazoIzq + 1 : 45;
+				banderaBrazoIzq = (BrazoIzq == 45) ? 1 : 0;
+			}
+			else {
+				BrazoIzq = (BrazoIzq > -45) ? BrazoIzq - 1 : -45;
+				banderaBrazoIzq = (BrazoIzq == -45) ? 0 : 1;
+			}
+
+			if (banderaBrazoDer == 0) {
+				BrazoDer = (BrazoDer > -45) ? BrazoDer - 1 : -45;
+				banderaBrazoDer = (BrazoDer == -45) ? 1 : 0;
+			}
+			else {
+				BrazoDer = (BrazoDer < 45) ? BrazoDer + 1 : 45;
+				banderaBrazoDer = (BrazoDer == 45) ? 0 : 1;
+			}
+
+			if (banderaPiernaDer == 0) {
+				PiernaDer = (PiernaDer < 45) ? PiernaDer + 1 : 45;
+				banderaPiernaDer = (PiernaDer == 45) ? 1 : 0;
+			}
+			else {
+				PiernaDer = (PiernaDer > -45) ? PiernaDer - 1 : -45;
+				banderaPiernaDer = (PiernaDer == -45) ? 0 : 1;
+			}
+
+			if (banderaPiernaIzq == 0) {
+				PiernaIzq = (PiernaIzq > -45) ? PiernaIzq - 1 : -45;
+				banderaPiernaIzq = (PiernaIzq == -45) ? 1 : 0;
+			}
+			else {
+				PiernaIzq = (PiernaIzq < 45) ? PiernaIzq + 1 : 45;
+				banderaPiernaIzq = (PiernaIzq == 45) ? 0 : 1;
+			}
+		}
+
+		//Si se presiona A va para atras
+		if (mainWindow.mueveEnMenosX() || mainWindow.mueveEnMenosZ()) {
+			if (banderaBrazoDer == 0) {
+				BrazoDer = (BrazoDer < 45) ? BrazoDer + 1 : 45;
+				banderaBrazoDer = (BrazoDer == 45) ? 1 : 0;
+			}
+			else {
+				BrazoDer = (BrazoDer > -45) ? BrazoDer - 1 : -45;
+				banderaBrazoDer = (BrazoDer == -45) ? 0 : 1;
+			}
+
+			if (banderaBrazoIzq == 0) {
+				BrazoIzq = (BrazoIzq > -45) ? BrazoIzq - 1 : -45;
+				banderaBrazoIzq = (BrazoIzq == -45) ? 1 : 0;
+			}
+			else {
+				BrazoIzq = (BrazoIzq < 45) ? BrazoIzq + 1 : 45;
+				banderaBrazoIzq = (BrazoIzq == 45) ? 0 : 1;
+			}
+
+			if (banderaPiernaIzq == 0) {
+				PiernaIzq = (PiernaIzq < 45) ? PiernaIzq + 1 : 45;
+				banderaPiernaIzq = (PiernaIzq == 45) ? 1 : 0;
+			}
+			else {
+				PiernaIzq = (PiernaIzq > -45) ? PiernaIzq - 1 : -45;
+				banderaPiernaIzq = (PiernaIzq == -45) ? 0 : 1;
+			}
+
+			if (banderaPiernaDer == 0) {
+				PiernaDer = (PiernaDer > -45) ? PiernaDer - 1 : -45;
+				banderaPiernaDer = (PiernaDer == -45) ? 1 : 0;
+			}
+			else {
+				PiernaDer = (PiernaDer < 45) ? PiernaDer + 1 : 45;
+				banderaPiernaDer = (PiernaDer == 45) ? 0 : 1;
+			}
+		}
+
+		//Si se presiona W va para al fondo
+		if (mainWindow.mueveEnZ())
+		{
+			if (RotAvatar < 90)
+			{
+				RotAvatar += 2.0;
+
+			}
+		}
+		//Si se presiona S va para en contra el fondo
+		if (mainWindow.mueveEnMenosZ())
+		{
+			if (RotAvatar > -90)
+			{
+				RotAvatar -= 2.0;
+			}
+		}
+
+		printf("El valor booleano es %s\n", mainWindow.mueveEnZ() ? "verdadero" : "falso");
+		printf("El valor de Rotacion es %f\n", RotAvatar);
 		// torso cabeza
 		model = glm::mat4(1.0);
-		//model = glm::translate(model, glm::vec3(-13.5f , 48.0f , 33.0f ));
-		model = glm::translate(model, glm::vec3(-13.5f + mainWindow.getmuevex(), 48.0f + mainWindow.getmuevey(), 33.0f + mainWindow.getmuevez()));
+		model = glm::translate(model, glm::vec3(-13.5f + mainWindow.getmuevex(), 48.0f , 33.0f - mainWindow.getmuevez()));
 
 		model = glm::scale(model, glm::vec3(0.75 , 0.75f, 0.75f));
-		model = glm::rotate(model, 90.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, (90.0f + RotAvatar) * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		modelaux2 = model;
 		model = glm::scale(model, glm::vec3(0.03f, 0.03f, 0.03f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -1064,6 +1185,7 @@ int main()
 		// brazo izquierdo
 		model = modelaux2;
 		model = glm::translate(model, glm::vec3(0.38f, 0.66f, -0.07f));
+		model = glm::rotate(model, (0 + BrazoIzq ) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.03f, 0.03f, 0.03f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		brazo_izquierdo.RenderModel();
@@ -1071,6 +1193,7 @@ int main()
 		// brazo derecho
 		model = modelaux2;
 		model = glm::translate(model, glm::vec3(-0.38f, 0.66f, -0.07f));
+		model = glm::rotate(model, (0 + BrazoDer) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.03f, 0.03f, 0.03f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		brazo_derecho.RenderModel();
@@ -1078,6 +1201,7 @@ int main()
 		// pierna izquierda
 		model = modelaux2;
 		model = glm::translate(model, glm::vec3(0.13f, -0.03f, 0.0f));
+		model = glm::rotate(model, (0 + PiernaIzq ) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.03f, 0.03f, 0.03f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		pierna_izquierda.RenderModel();
@@ -1085,6 +1209,7 @@ int main()
 		// pierna derecha
 		model = modelaux2;
 		model = glm::translate(model, glm::vec3(-0.13f, -0.03f, 0.0f));
+		model = glm::rotate(model, (0 + PiernaDer ) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.03f, 0.03f, 0.03f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		pierna_derecha.RenderModel();
