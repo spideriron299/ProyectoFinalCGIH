@@ -1,0 +1,32 @@
+# Blender 3.6.2 MTL File: 'granada.blend'
+# www.blender.org
+
+newmtl pCube5SG.001
+Ns 4.309999
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd metal_gris.jpeg
+
+newmtl pCube5SG1.001
+Ns 4.309999
+Ka 1.000000 1.000000 1.000000
+Ks 0.210000 0.210000 0.210000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd verde_militar.png
+
+newmtl pCube5SG2.001
+Ns 18.000004
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd metal_gris.jpeg

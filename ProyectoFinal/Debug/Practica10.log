@@ -1,0 +1,22 @@
+﻿  ProyectoFinal.cpp
+C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Practica10\Window.h(12,36): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Practica10\Window.h(13,37): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Practica10\ProyectoFinal.cpp(709,15): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Practica10\ProyectoFinal.cpp(711,33): warning C4244: '+=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Practica10\ProyectoFinal.cpp(804,22): warning C4244: '+=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Practica10\ProyectoFinal.cpp(815,22): warning C4244: '-=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Practica10\ProyectoFinal.cpp(932,37): warning C4805: '==': combinación no segura del tipo 'GLboolean' y el tipo 'bool' en la operación
+C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Practica10\ProyectoFinal.cpp(943,31): warning C4244: '-=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Practica10\ProyectoFinal.cpp(954,31): warning C4244: '+=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Practica10\ProyectoFinal.cpp(972,37): warning C4805: '==': combinación no segura del tipo 'GLboolean' y el tipo 'bool' en la operación
+C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Practica10\ProyectoFinal.cpp(983,31): warning C4244: '-=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Practica10\ProyectoFinal.cpp(994,31): warning C4244: '+=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Practica10\ProyectoFinal.cpp(1011,37): warning C4805: '==': combinación no segura del tipo 'GLboolean' y el tipo 'bool' en la operación
+C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Practica10\ProyectoFinal.cpp(1021,31): warning C4244: '+=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Practica10\ProyectoFinal.cpp(1032,31): warning C4244: '-=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Practica10\ProyectoFinal.cpp(1362,36): warning C4805: '==': combinación no segura del tipo 'GLboolean' y el tipo 'bool' en la operación
+C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Practica10\ProyectoFinal.cpp(1373,24): warning C4244: '-=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Practica10\ProyectoFinal.cpp(1384,24): warning C4244: '+=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Practica10\ProyectoFinal.cpp(1396,24): warning C4244: '-=': conversión de 'double' a 'float'; posible pérdida de datos
+LINK : warning LNK4098: la biblioteca predeterminada'MSVCRT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
+  Practica10.vcxproj -> C:\Users\diego\OneDrive\Desktop\Practica10\Practica10\Debug\Practica10.exe
